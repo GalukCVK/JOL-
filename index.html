@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JÖL · Sanguches Atrevidos · Saavedra, Buenos Aires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --olive:#1a2010;
+  --olive-mid:#1f2a14;
+  --olive-light:#2d3d1e;
+  --cream:#f5f0e8;
+  --cream-dim:#b8b0a0;
+  --red:#c0392b;
+  --red-light:#e04030;
+  --muted:#7a8a6a;
+}
+html{scroll-behavior:smooth}
+body{background:var(--olive);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--olive)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
+nav.scrolled{background:rgba(26,32,16,.95);backdrop-filter:blur(20px);padding:14px 48px;border-bottom:1px solid rgba(192,57,43,.2)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:5px;color:var(--cream);text-decoration:none}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--cream-dim);text-decoration:none;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{background:var(--red)!important;color:var(--cream)!important;padding:8px 20px;border-radius:2px}
+.nav-cta:hover{background:var(--red-light)!important}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(192,57,43,.09) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(45,61,30,.5) 0%,transparent 50%)}
+.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:1100px;width:100%}
+
+/* IG CARD */
+.ig-card{background:rgba(12,18,7,.9);border:1px solid rgba(192,57,43,.22);border-radius:20px;padding:30px;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.ig-header{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+.ig-avatar-wrap{position:relative;width:76px;height:76px;flex-shrink:0}
+.ig-avatar-ring{position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(45deg,#c0392b,#f39c12,#c0392b,#8e1a10);background-size:300% 300%;animation:spin 3s linear infinite}
+@keyframes spin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.ig-avatar-inner{position:absolute;inset:3px;border-radius:50%;overflow:hidden;background:var(--olive)}
+.ig-avatar-inner img{width:100%;height:100%;object-fit:cover}
+.ig-name{font-size:.92rem;font-weight:600;color:var(--cream);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.ig-badge{width:17px;height:17px;background:linear-gradient(135deg,#4facfe,#00f2fe);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(79,172,254,.4)}
+.ig-badge svg{width:9px;height:9px;fill:#fff}
+.ig-handle{font-size:.76rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.ig-handle:hover{color:var(--red)}
+.ig-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.05);border-radius:10px;overflow:hidden;margin-bottom:18px}
+.ig-stat{background:rgba(12,18,7,.8);padding:12px 8px;text-align:center}
+.ig-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;color:var(--cream);line-height:1}
+.ig-stat-label{font-size:.62rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+.ig-category{font-size:.7rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.ig-bio{font-size:.82rem;line-height:1.65;color:var(--cream-dim);margin-bottom:16px}
+.ig-bio strong{color:var(--cream);font-weight:500}
+.ig-actions{display:flex;gap:8px;margin-bottom:18px}
+.ig-btn{flex:1;padding:9px;border-radius:8px;font-size:.76rem;font-weight:600;text-align:center;text-decoration:none;transition:all .2s;font-family:'Inter',sans-serif}
+.ig-btn-primary{background:var(--red);color:var(--cream)}
+.ig-btn-primary:hover{background:var(--red-light)}
+.ig-btn-secondary{background:rgba(255,255,255,.07);color:var(--cream);border:1px solid rgba(255,255,255,.1)}
+.ig-btn-secondary:hover{background:rgba(255,255,255,.12)}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:8px;overflow:hidden}
+.ig-grid-item{aspect-ratio:1;overflow:hidden;background:var(--olive-light)}
+.ig-grid-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ig-grid-item:hover img{transform:scale(1.06)}
+
+/* HERO TEXT */
+.hero-tag{font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--red)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,6.5vw,6.5rem);line-height:.92;letter-spacing:2px;margin-bottom:22px}
+.hero-title .accent{color:var(--red)}
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.75;color:var(--cream-dim);margin-bottom:28px;font-style:italic}
+.hero-stat-box{display:flex;align-items:center;gap:20px;padding:18px 22px;background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.2);border-radius:12px;margin-bottom:28px}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:2px;color:var(--red);line-height:1}
+.hero-stat-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.hero-ctas{display:flex;gap:14px}
+.btn-main{background:var(--red);color:var(--cream);padding:14px 30px;text-decoration:none;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:3px;transition:all .2s}
+.btn-main:hover{background:var(--red-light);transform:translateY(-1px)}
+.btn-ghost{color:var(--cream);padding:14px 30px;text-decoration:none;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,.18);border-radius:3px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+
+/* SECTIONS */
+section{padding:96px 48px}
+.section-label{font-size:.63rem;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4.5vw,4.2rem);letter-spacing:2px;line-height:1;margin-bottom:18px}
+.section-divider{width:56px;height:2px;background:var(--red);margin-bottom:40px}
+.inner{max-width:1100px;margin:0 auto}
+
+/* CONCEPTO */
+#concepto{background:var(--olive-mid);position:relative;overflow:hidden}
+#concepto::before{content:'12M²';position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:18rem;color:rgba(255,255,255,.018);pointer-events:none;line-height:1}
+.concepto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.concepto-text p{font-family:'Cormorant Garamond',serif;font-size:1.12rem;line-height:1.82;color:var(--cream-dim);margin-bottom:18px}
+.concepto-text p strong{color:var(--cream);font-style:italic}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.pill{padding:7px 16px;border:1px solid rgba(192,57,43,.35);border-radius:100px;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--red)}
+.concepto-visual{position:relative}
+.concepto-photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--olive-light)}
+.concepto-photo img{width:100%;height:100%;object-fit:cover}
+.concepto-badge{position:absolute;bottom:28px;left:-28px;background:var(--red);color:var(--cream);padding:16px 22px;border-radius:10px;text-align:center;box-shadow:0 12px 40px rgba(192,57,43,.4)}
+.badge-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:2px;line-height:1}
+.badge-text{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-top:2px}
+
+/* CHEF */
+#chef{background:var(--olive)}
+.chef-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.chef-photos{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:14px;overflow:hidden}
+.chef-photo-main{grid-column:span 2;aspect-ratio:16/9;overflow:hidden;background:var(--olive-light)}
+.chef-photo-main img{width:100%;height:100%;object-fit:cover;object-position:top}
+.chef-photo-sm{aspect-ratio:1;overflow:hidden;background:var(--olive-light)}
+.chef-photo-sm img{width:100%;height:100%;object-fit:cover}
+.chef-ig-mini{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(12,18,7,.8);border:1px solid rgba(192,57,43,.2);border-radius:10px;text-decoration:none;margin-top:20px;transition:all .25s}
+.chef-ig-mini:hover{background:rgba(192,57,43,.1);border-color:rgba(192,57,43,.4)}
+.chef-ig-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--red);flex-shrink:0}
+.chef-ig-avatar img{width:100%;height:100%;object-fit:cover}
+.chef-ig-info{flex:1}
+.chef-ig-name{font-size:.85rem;font-weight:600;color:var(--cream)}
+.chef-ig-handle{font-size:.72rem;color:var(--muted)}
+.chef-ig-stat{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--red);letter-spacing:1px;margin-left:auto}
+
+/* CARTA */
+#carta{background:var(--olive-mid)}
+.cat-block{margin-bottom:4px}
+.cat-header{display:flex;align-items:center;gap:20px;padding:22px 28px;background:rgba(12,18,7,.6);border-bottom:1px solid rgba(255,255,255,.04)}
+.cat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(192,57,43,.3);letter-spacing:2px;line-height:1;flex-shrink:0}
+.cat-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--cream);line-height:1}
+.cat-subtitle{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.cat-grid{display:grid;gap:2px;background:rgba(255,255,255,.025)}
+.cat-grid.three{grid-template-columns:repeat(3,1fr)}
+.cat-grid.two{grid-template-columns:repeat(2,1fr)}
+.cat-item{background:rgba(12,18,7,.75);padding:28px 26px;position:relative;overflow:hidden;transition:background .3s}
+.cat-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height .4s}
+.cat-item:hover{background:rgba(18,26,10,.9)}
+.cat-item:hover::before{height:100%}
+.carta-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:8px;line-height:1.2}
+.carta-desc{font-size:.78rem;line-height:1.7;color:var(--muted);margin-bottom:12px}
+.carta-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase}
+.carnivoro{background:rgba(192,57,43,.14);color:#e06050;border:1px solid rgba(192,57,43,.28)}
+.vegano{background:rgba(60,120,40,.18);color:#7bc040;border:1px solid rgba(60,120,40,.28)}
+.vegetariano{background:rgba(180,140,40,.15);color:#d4a840;border:1px solid rgba(180,140,40,.28)}
+/* Bebidas row */
+.bebidas-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.025);margin-top:2px}
+.bebida-col{background:rgba(12,18,7,.75);padding:28px 26px}
+.bebida-col-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--red);margin-bottom:16px}
+.bebida-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.82rem;color:var(--cream-dim)}
+.bebida-item:last-child{border-bottom:none}
+.bebida-item strong{color:var(--cream);display:block;font-weight:500;font-size:.85rem;margin-bottom:1px}
+.bebida-item span{font-size:.75rem;color:var(--muted)}
+.bebida-note{font-size:.7rem;color:var(--muted);margin-top:10px;font-style:italic}
+
+/* GALERÍA */
+#galeria{background:var(--olive-mid);padding:96px 0}
+.galeria-head{padding:0 48px;margin-bottom:44px}
+.galeria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.gal-item{aspect-ratio:1;overflow:hidden;background:var(--olive-light);position:relative;cursor:pointer}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gal-item:hover img{transform:scale(1.08)}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(192,57,43,.28),transparent);opacity:0;transition:opacity .3s}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal-item:nth-child(1) img{aspect-ratio:unset;height:100%}
+
+/* MÉTRICAS */
+#metricas{background:var(--olive);border-top:1px solid rgba(192,57,43,.14);border-bottom:1px solid rgba(192,57,43,.14);padding:0}
+.metricas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.metrica{background:var(--olive);padding:64px 32px;text-align:center;position:relative;overflow:hidden}
+.metrica::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--red);transition:width .5s}
+.metrica:hover::after{width:60%}
+.metrica-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,4.5vw,4.5rem);letter-spacing:2px;color:var(--red);line-height:1}
+.metrica-label{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:10px}
+
+/* CONTACTO */
+#contacto{background:var(--olive-mid)}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.horarios-list{list-style:none;margin:28px 0}
+.horarios-list li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:.88rem}
+.horarios-list .dia{color:var(--muted);letter-spacing:.5px}
+.horarios-list .hora{color:var(--cream);font-weight:500}
+.ubicacion-card{display:flex;align-items:flex-start;gap:16px;padding:22px;background:rgba(12,18,7,.7);border-radius:12px;border:1px solid rgba(255,255,255,.05);margin-bottom:20px}
+.ubi-icon{width:40px;height:40px;background:rgba(192,57,43,.14);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ubi-text h4{font-size:.84rem;font-weight:600;color:var(--cream);margin-bottom:4px}
+.ubi-text p{font-size:.8rem;color:var(--muted);line-height:1.6}
+.pedidos-link{display:flex;align-items:center;gap:16px;padding:22px 26px;background:linear-gradient(135deg,rgba(192,57,43,.14),rgba(192,57,43,.05));border:1px solid rgba(192,57,43,.28);border-radius:12px;text-decoration:none;transition:all .3s;margin-bottom:14px}
+.pedidos-link:hover{background:linear-gradient(135deg,rgba(192,57,43,.22),rgba(192,57,43,.1));border-color:rgba(192,57,43,.45);transform:translateY(-2px)}
+.pedidos-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--red);letter-spacing:2px}
+.pedidos-info h4{font-size:.88rem;font-weight:600;color:var(--cream);margin-bottom:2px}
+.pedidos-info p{font-size:.74rem;color:var(--muted)}
+.pedidos-arrow{margin-left:auto;color:var(--red);font-size:1.1rem}
+.redes{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.red-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;text-decoration:none;color:var(--cream-dim);font-size:.72rem;letter-spacing:1px;transition:all .2s}
+.red-btn:hover{background:rgba(192,57,43,.14);border-color:rgba(192,57,43,.3);color:var(--cream)}
+.red-btn svg{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+
+/* FOOTER */
+footer{background:rgba(8,12,5,.98);padding:48px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:6px;color:var(--cream);margin-bottom:6px}
+.footer-logo span{color:var(--red)}
+.footer-sub{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.footer-copy{font-size:.7rem;color:rgba(122,138,106,.45)}
+
+/* ANIMATIONS */
+.reveal,.reveal-l,.reveal-r{opacity:0;transition:opacity .8s ease,transform .8s ease}
+.reveal{transform:translateY(36px)}
+.reveal-l{transform:translateX(-36px)}
+.reveal-r{transform:translateX(36px)}
+.reveal.in,.reveal-l.in,.reveal-r.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-content,.concepto-grid,.contacto-grid,.chef-grid{grid-template-columns:1fr;gap:48px}
+  .cat-grid.three,.cat-grid.two,.bebidas-row{grid-template-columns:1fr}
+  .metricas-grid{grid-template-columns:repeat(2,1fr)}
+  .galeria-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-item:nth-child(1){grid-column:span 1;grid-row:span 1}
+  nav{padding:16px 24px}
+  section{padding:72px 24px}
+  #galeria{padding:72px 0}
+  .galeria-head{padding:0 24px}
+  .nav-links{display:none}
+  .chef-photos{grid-template-columns:1fr}
+  .chef-photo-main{grid-column:span 1}
+}
+@media(max-width:480px){
+  .metricas-grid{grid-template-columns:repeat(2,1fr)}
+  .galeria-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">JÖ<span>L</span></a>
+  <ul class="nav-links">
+    <li><a href="#concepto">El Concepto</a></li>
+    <li><a href="#chef">El Chef</a></li>
+    <li><a href="#carta">La Carta</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Encontrarnos</a></li>
+    <li><a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires" target="_blank" class="nav-cta">Pedir Ahora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+
+    <div class="ig-card reveal-l">
+      <div class="ig-header">
+        <div class="ig-avatar-wrap">
+          <div class="ig-avatar-ring"></div>
+          <div class="ig-avatar-inner">
+            <img src="assets/instagram/profile.jpg" alt="JÖL perfil">
+          </div>
+        </div>
+        <div>
+          <div class="ig-name">
+            JÖL-Sanguches atrevidos
+            <div class="ig-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          </div>
+          <a href="https://www.instagram.com/jol.12m2/" target="_blank" class="ig-handle">@jol.12m2</a>
+        </div>
+      </div>
+      <div class="ig-stats">
+        <div class="ig-stat"><div class="ig-stat-num">30</div><div class="ig-stat-label">Posts</div></div>
+        <div class="ig-stat"><div class="ig-stat-num">41K</div><div class="ig-stat-label">Seguidores</div></div>
+        <div class="ig-stat"><div class="ig-stat-num">6</div><div class="ig-stat-label">Seguidos</div></div>
+      </div>
+      <div class="ig-category">🍔 Hall Bar · Sanguches Gourmet · Saavedra</div>
+      <div class="ig-bio"><strong>12 m² de atrevimiento.</strong> El primer Hall Bar de Argentina. Vilela 2982, Saavedra, CABA.</div>
+      <div class="ig-actions">
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires" target="_blank" class="ig-btn ig-btn-primary">Pedí ahora</a>
+        <a href="https://www.instagram.com/jol.12m2/" target="_blank" class="ig-btn ig-btn-secondary">Ver perfil</a>
+      </div>
+      <div class="ig-grid">
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 020901.png" alt="post 1"></div>
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 021020.png" alt="post 2"></div>
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 021030.png" alt="post 3"></div>
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 021043.png" alt="post 4"></div>
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 021054.png" alt="post 5"></div>
+        <div class="ig-grid-item"><img src="assets/instagram/Screenshot 2026-05-29 021102.png" alt="post 6"></div>
+      </div>
+    </div>
+
+    <div class="reveal-r">
+      <div class="hero-tag">Primer Hall Bar de Argentina</div>
+      <h1 class="hero-title">SANGUCHES<br><span class="accent">ATREVI</span>DOS</h1>
+      <p class="hero-desc">12 m² donde el street food se convierte en alta cocina. Una carta sin rodeos, con personalidad y sin concesiones.</p>
+      <div class="hero-stat-box">
+        <div class="hero-stat-num">41K</div>
+        <div class="hero-stat-label">Seguidores que<br>ya lo saben.</div>
+      </div>
+      <div class="hero-ctas">
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires" target="_blank" class="btn-main">Pedir en PedidosYa</a>
+        <a href="#concepto" class="btn-ghost">Nuestra historia</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONCEPTO -->
+<section id="concepto">
+  <div class="inner concepto-grid">
+    <div class="concepto-text reveal-l">
+      <div class="section-label">El Concepto</div>
+      <h2 class="section-title">UN HALL.<br>12 M².<br>SIN VUELTAS.</h2>
+      <div class="section-divider"></div>
+      <p>JÖL nació de una idea tan simple como atrevida: convertir el hall de un edificio en el bar más pequeño y memorable de Buenos Aires. <strong>12 m² de elegancia, minimalismo y espíritu callejero</strong>, todo en uno.</p>
+      <p>Detrás está <strong>Misael Noe</strong>, chef de 23 años con seis años de experiencia que reinterpreta el street food como gastronomía de autor. En JÖL nada es casual: desde la carta hasta la identidad de marca, cada detalle tiene intención.</p>
+      <p>El concepto de <em>Hall Bar</em> —popular en países anglosajones— debuta en Argentina de la mano de JÖL. Pequeño en metros, enorme en personalidad.</p>
+      <div class="pills">
+        <span class="pill">Hall Bar</span>
+        <span class="pill">Gourmet</span>
+        <span class="pill">Minimalista</span>
+        <span class="pill">Saavedra, CABA</span>
+        <span class="pill">Street Food</span>
+        <span class="pill">Vegano friendly</span>
+      </div>
+    </div>
+    <div class="concepto-visual reveal-r">
+      <div class="concepto-photo">
+        <img src="assets/instagram/Screenshot 2026-05-29 021144.png" alt="JÖL local">
+      </div>
+      <div class="concepto-badge">
+        <div class="badge-num">12M²</div>
+        <div class="badge-text">El bar más atrevido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF -->
+<section id="chef">
+  <div class="inner chef-grid">
+    <div class="reveal-l">
+      <div class="section-label">El Chef</div>
+      <h2 class="section-title">MISAEL<br>NOE</h2>
+      <div class="section-divider"></div>
+      <div class="concepto-text">
+        <p>23 años y seis de experiencia en cocinas que forjaron un criterio propio. Pasó por el bodegón <strong>Yiyo El Zeneize</strong> y <strong>Vereda Adentro</strong>, donde profundizó en cocina plant-based antes de apostar todo a JÖL.</p>
+        <p>Para Misael, <strong>"el diferencial está en los detalles: desde el menú hasta la identidad de marca que construimos"</strong>. Cada sanguche lleva horas de desarrollo detrás —fermentaciones, salsas propias, ingredientes de temporada.</p>
+      </div>
+      <a href="https://www.instagram.com/misael_noe/" target="_blank" class="chef-ig-mini">
+        <div class="chef-ig-avatar"><img src="assets/misael/profile.jpg" alt="Misael Noe"></div>
+        <div class="chef-ig-info">
+          <div class="chef-ig-name">Misael Noe</div>
+          <div class="chef-ig-handle">@misael_noe · Chef &amp; fundador de JÖL</div>
+        </div>
+        <div class="chef-ig-stat">64K</div>
+      </a>
+    </div>
+    <div class="chef-photos reveal-r">
+      <div class="chef-photo-main">
+        <img src="assets/misael/profile.jpg" alt="Misael Noe chef JÖL">
+      </div>
+      <div class="chef-photo-sm">
+        <img src="assets/instagram/Screenshot 2026-05-29 021043.png" alt="JÖL cocina">
+      </div>
+      <div class="chef-photo-sm">
+        <img src="assets/instagram/Screenshot 2026-05-29 021158.png" alt="JÖL sanguche">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section id="carta">
+  <div class="inner">
+    <div class="reveal" style="margin-bottom:40px">
+      <div class="section-label">La Carta</div>
+      <h2 class="section-title">LA CARTA<br>COMPLETA.</h2>
+      <div class="section-divider"></div>
+    </div>
+  </div>
+
+  <!-- ENTRADAS -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <span class="cat-num">01</span>
+      <h3 class="cat-title">Entradas</h3>
+    </div>
+    <div class="cat-grid three">
+      <div class="cat-item">
+        <h4 class="carta-name">Bruschetta</h4>
+        <p class="carta-desc">Pan de campo · puré de arvejas · pickles de uva · praline de coriandro.</p>
+        <span class="carta-tag vegano">🌿 Vegano</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Rice Cube</h4>
+        <p class="carta-desc">Escabeche de hongos · gel de durazno · togarashi · alga nori.</p>
+        <span class="carta-tag vegano">🌿 Vegano</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Cracker de Kimchi</h4>
+        <p class="carta-desc">Ricota cítrica · miel orgánica.</p>
+        <span class="carta-tag vegetariano">🥚 Vegetariano</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARNÍVOROS -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <span class="cat-num">02</span>
+      <h3 class="cat-title">Carnívoros</h3>
+      <span class="cat-subtitle">En pan de pretzel</span>
+    </div>
+    <div class="cat-grid three">
+      <div class="cat-item">
+        <h4 class="carta-name">Fucking Cesar</h4>
+        <p class="carta-desc">Pollo asado · aderezo cesar · lechuga · cebolla encurtida · eneldo.</p>
+        <span class="carta-tag carnivoro">🥩 Carnívoro</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Tapa de Asado</h4>
+        <p class="carta-desc">Chimichurri · aderezo de miso y tahini · pickles de mostaza.</p>
+        <span class="carta-tag carnivoro">🥩 Carnívoro</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Tartar</h4>
+        <p class="carta-desc">Lomo curado en shio koji · mayo de ajo negro · ralladura de limón.</p>
+        <span class="carta-tag carnivoro">🥩 Carnívoro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEGGIES -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <span class="cat-num">03</span>
+      <h3 class="cat-title">Veggies</h3>
+      <span class="cat-subtitle">En pan negro</span>
+    </div>
+    <div class="cat-grid three">
+      <div class="cat-item">
+        <h4 class="carta-name">Jolybahn</h4>
+        <p class="carta-desc">Paté de hongos · tofu y hongos · ensalada de hierbas · pepinos agridulces.</p>
+        <span class="carta-tag vegano">🌿 Vegano</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Melena de León</h4>
+        <p class="carta-desc">Salsa toné veggie · cebollita encurtida · eneldo.</p>
+        <span class="carta-tag vegano">🌿 Vegano</span>
+      </div>
+      <div class="cat-item">
+        <h4 class="carta-name">Gírgolas Desmechadas</h4>
+        <p class="carta-desc">Queso de cajú · cebolla caramelizada · salsa de berenjenas quemadas.</p>
+        <span class="carta-tag vegano">🌿 Vegano</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTRE -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <span class="cat-num">04</span>
+      <h3 class="cat-title">Postre</h3>
+    </div>
+    <div class="cat-grid two">
+      <div class="cat-item">
+        <h4 class="carta-name">Postre de la Semana</h4>
+        <p class="carta-desc">Cambia cada semana según la temporada. Consultá disponibilidad en el local o por Instagram.</p>
+      </div>
+      <div class="cat-item" style="display:flex;align-items:center;justify-content:center;opacity:.4">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:4px;color:var(--red)">¿?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="bebidas-row">
+    <div class="bebida-col">
+      <div class="bebida-col-title">Vinos</div>
+      <div class="bebida-item"><strong>Familia Cánepa</strong><span>Noche Oscura Malbec Rosé</span></div>
+      <div class="bebida-item"><strong>&nbsp;</strong><span>La Padovana Criolla</span></div>
+      <div class="bebida-item" style="margin-top:12px"><strong>Melodía</strong><span>Naranjo Viognier</span></div>
+      <div class="bebida-item"><strong>&nbsp;</strong><span>Sauvignon Blanc</span></div>
+    </div>
+    <div class="bebida-col">
+      <div class="bebida-col-title">Vermú</div>
+      <div class="bebida-item"><strong>Estrafalario Rosso</strong></div>
+      <div class="bebida-item"><strong>Estrafalario Naranjo</strong></div>
+      <p class="bebida-note">La botella incluye 2 sifones de soda.</p>
+    </div>
+    <div class="bebida-col">
+      <div class="bebida-col-title">Bebidas</div>
+      <div class="bebida-item"><strong>Coca-Cola de vidrio</strong><span>350ml</span></div>
+      <div class="bebida-item"><strong>Soda</strong><span>600cc</span></div>
+      <div class="bebida-item"><strong>Agua</strong><span>Sin costo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="galeria-head reveal inner">
+    <div class="section-label">Galería</div>
+    <h2 class="section-title">LO QUE VES<br>EN INSTAGRAM</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="galeria-grid">
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021124.png" alt="JÖL 1"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021158.png" alt="JÖL 2"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021219.png" alt="JÖL 3"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021232.png" alt="JÖL 4"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021030.png" alt="JÖL 5"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021020.png" alt="JÖL 6"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021102.png" alt="JÖL 7"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="assets/instagram/Screenshot 2026-05-29 021054.png" alt="JÖL 8"><div class="gal-overlay"></div></div>
+  </div>
+</section>
+
+<!-- MÉTRICAS -->
+<section id="metricas">
+  <div class="metricas-grid">
+    <div class="metrica">
+      <div class="metrica-num" data-target="41" data-suffix="K">0</div>
+      <div class="metrica-label">Seguidores en Instagram</div>
+    </div>
+    <div class="metrica">
+      <div class="metrica-num" data-target="12" data-suffix="">0</div>
+      <div class="metrica-label">m² de pura actitud</div>
+    </div>
+    <div class="metrica">
+      <div class="metrica-num" data-target="4" data-suffix="">0</div>
+      <div class="metrica-label">Sanguches en carta</div>
+    </div>
+    <div class="metrica">
+      <div class="metrica-num" data-target="1" data-suffix="°">0</div>
+      <div class="metrica-label">Hall Bar en Argentina</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="inner contacto-grid">
+    <div class="reveal-l">
+      <div class="section-label">Horarios</div>
+      <h2 class="section-title">CUÁNDO<br>ENCONTRARNOS</h2>
+      <div class="section-divider"></div>
+      <ul class="horarios-list">
+        <li><span class="dia">Miércoles — Viernes</span><span class="hora">19:00 — 23:30</span></li>
+        <li><span class="dia">Sábados y Feriados</span><span class="hora">12:30 — 16:30</span></li>
+        <li><span class="dia">Sábados y Feriados (noche)</span><span class="hora">19:00 — 23:00</span></li>
+        <li><span class="dia">Lunes — Martes</span><span class="hora">Cerrado</span></li>
+      </ul>
+    </div>
+    <div class="reveal-r">
+      <div class="section-label">Dónde estamos</div>
+      <h2 class="section-title">VILELA<br>2982</h2>
+      <div class="section-divider"></div>
+      <div class="ubicacion-card">
+        <div class="ubi-icon">📍</div>
+        <div class="ubi-text">
+          <h4>Dirección</h4>
+          <p>Vilela 2982, Saavedra<br>Ciudad Autónoma de Buenos Aires<br>A 350m del Parque Saavedra</p>
+        </div>
+      </div>
+      <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires" target="_blank" class="pedidos-link">
+        <div class="pedidos-logo-text">PY</div>
+        <div class="pedidos-info">
+          <h4>Pedir por PedidosYa</h4>
+          <p>Delivery a tu casa · Buenos Aires</p>
+        </div>
+        <div class="pedidos-arrow">→</div>
+      </a>
+      <div class="redes">
+        <a href="https://www.instagram.com/jol.12m2/" target="_blank" class="red-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @jol.12m2
+        </a>
+        <a href="https://www.instagram.com/misael_noe/" target="_blank" class="red-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @misael_noe
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">JÖ<span>L</span></div>
+  <div class="footer-sub">Sanguches Atrevidos · Saavedra, Buenos Aires</div>
+  <div style="display:flex;justify-content:center;gap:20px;margin-bottom:22px;flex-wrap:wrap">
+    <a href="https://www.instagram.com/jol.12m2/" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:1px;transition:color .2s" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='#7a8a6a'">@jol.12m2</a>
+    <span style="color:rgba(122,138,106,.3)">·</span>
+    <a href="https://www.instagram.com/misael_noe/" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:1px;transition:color .2s" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='#7a8a6a'">@misael_noe</a>
+    <span style="color:rgba(122,138,106,.3)">·</span>
+    <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:1px;transition:color .2s" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='#7a8a6a'">PedidosYa</a>
+  </div>
+  <div class="footer-copy">© 2026 JÖL-Sanguches atrevidos · Vilela 2982, Saavedra, CABA</div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+// Stagger carta items
+document.querySelectorAll('.carta-item').forEach((item, i) => {
+  item.style.opacity = '0';
+  item.style.transform = 'translateY(28px)';
+  item.style.transition = 'opacity .6s ease, transform .6s ease, background .3s';
+  const itemObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+        }, i * 130);
+        itemObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  itemObs.observe(item);
+});
+
+// Stagger galeria items
+document.querySelectorAll('.gal-item').forEach((item, i) => {
+  item.style.opacity = '0';
+  item.style.transition = `opacity .6s ease ${i * 80}ms`;
+  const galObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) { e.target.style.opacity = '1'; galObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.05 });
+  galObs.observe(item);
+});
+
+// Counter animation
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !e.target.classList.contains('done')) {
+      e.target.classList.add('done');
+      const target = parseInt(e.target.dataset.target);
+      const suffix = e.target.dataset.suffix || '';
+      const dur = 1600;
+      const start = Date.now();
+      const tick = () => {
+        const p = Math.min((Date.now()-start)/dur, 1);
+        const eased = 1 - Math.pow(1-p, 3);
+        e.target.textContent = Math.round(eased * target) + suffix;
+        if(p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+// Subtle parallax on hero bg
+window.addEventListener('scroll', () => {
+  const bg = document.querySelector('.hero-bg');
+  if(bg) bg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+}, { passive: true });
+</script>
+</body>
+</html>
